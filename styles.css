@@ -1,0 +1,329 @@
+/* styles.css - Modernized for Ashish Bhatt Academic Homepage */
+:root {
+  --main-color: #054284;
+  --accent-color: #fff;
+  --font-main: 'Roboto', Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  font-family: var(--font-main);
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+  color: #222;
+}
+
+header {
+  background: var(--main-color);
+  color: var(--accent-color);
+  padding: 2rem 1rem 1rem 1rem;
+  text-align: center;
+}
+
+header .profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+  margin-bottom: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+nav a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+nav a:hover {
+  color: #ffd700;
+}
+
+main {
+  max-width: 1000px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+aside {
+  flex: 1 1 250px;
+  min-width: 250px;
+  max-width: 320px;
+  background: #f0f4fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+section {
+  flex: 3 1 500px;
+  min-width: 300px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-main);
+  color: var(--main-color);
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+.languages-bar {
+  margin-bottom: 1rem;
+}
+.languages-bar .label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+.languages-bar .bar {
+  background: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 18px;
+  margin-top: 2px;
+}
+.languages-bar .fill {
+  background: var(--main-color);
+  height: 100%;
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem 0 1rem 0;
+  background: #f0f4fa;
+  color: #666;
+  font-size: 0.95rem;
+  margin-top: 2rem;
+}
+
+address {
+  font-style: normal;
+  margin-bottom: 1rem;
+}
+
+.pub-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 1.5em 0;
+}
+.pub-links li {
+  margin: 0;
+  padding: 0;
+}
+.pub-links a {
+  text-decoration: none;
+  color: var(--main-color);
+  font-weight: 500;
+  font-size: 1.08em;
+  transition: color 0.2s;
+}
+.pub-links a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 1000;
+  background: #ffd700;
+  color: #054284;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: left 0.2s;
+}
+.skip-link:focus, .skip-link:active {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  outline: 2px solid #054284;
+}
+
+@media (max-width: 900px) {
+  main {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  aside, section {
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+/* Responsive Navigation */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 1001;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+}
+.nav-toggle .hamburger {
+  display: block;
+  width: 2rem;
+  height: 0.2rem;
+  background: #222;
+  position: relative;
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after {
+  content: '';
+  display: block;
+  width: 2rem;
+  height: 0.2rem;
+  background: #222;
+  position: absolute;
+  border-radius: 2px;
+  transition: transform 0.3s, top 0.3s, bottom 0.3s;
+}
+.nav-toggle .hamburger::before {
+  top: -0.6rem;
+}
+.nav-toggle .hamburger::after {
+  bottom: -0.6rem;
+}
+
+.nav-toggle .hamburger.open {
+  background: transparent;
+}
+.nav-toggle .hamburger.open::before {
+  transform: translateY(0.6rem) rotate(45deg);
+}
+.nav-toggle .hamburger.open::after {
+  transform: translateY(-0.6rem) rotate(-45deg);
+}
+
+@media (max-width: 800px) {
+  header {
+    position: relative;
+  }
+  nav[role="navigation"] {
+    position: relative;
+    width: 100%;
+  }
+  .nav-toggle {
+    display: block;
+    z-index: 1001;
+  }
+  nav[role="navigation"] ul {
+    display: none !important;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 2rem;
+    gap: 0.5rem;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    margin: 0;
+    width: 100%;
+  }
+  nav[role="navigation"] ul.open {
+    display: flex !important;
+  }
+  nav[role="navigation"] li {
+    margin: 0.5rem 0;
+  }
+}
+
+@media (min-width: 801px) {
+  .nav-toggle {
+    display: none !important;
+  }
+  nav[role="navigation"] ul {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    position: static;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+img[alt] {
+  outline: none;
+}
+
+iframe {
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.18), 0 1.5px 6px 0 rgba(0,0,0,0.10);
+  margin-bottom: 2em;
+  background: #fff;
+  transition: box-shadow 0.2s;
+}
+iframe:focus, iframe:hover {
+  box-shadow: 0 6px 32px 0 rgba(0,0,0,0.28), 0 2px 8px 0 rgba(0,0,0,0.15);
+  outline: 2px solid var(--main-color);
+}
+
+/* Add a visible label for accessibility if needed */
+iframe[title]::before {
+  content: attr(title);
+  display: block;
+  font-size: 0.95em;
+  color: #555;
+  margin-bottom: 0.2em;
+  font-weight: 500;
+}
+
+section ul {
+  padding-left: 1.5em;
+  margin-left: 0;
+}
+section li {
+  margin-left: 0;
+}
+
+body, p, li, address, ul, ol, .languages-bar .label, .languages-bar .bar {
+  line-height: 1.8;
+  margin-bottom: 0.7em;
+}
+
+section, aside, address {
+  margin-bottom: 2em;
+}
