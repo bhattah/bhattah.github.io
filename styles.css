@@ -1,6 +1,6 @@
 /* styles.css - Modernized for Ashish Bhatt Academic Homepage */
 :root {
-  --main-color: #054284;
+  --main-color: #016d68;
   --accent-color: #fff;
   --font-main: 'Roboto', Arial, sans-serif;
 }
@@ -79,7 +79,14 @@ section {
   min-width: 300px;
 }
 
-h1, h2, h3, h4 {
+h1 {
+  font-family: var(--font-main);
+  color: #fff;
+}
+
+h2,
+h3,
+h4 {
   font-family: var(--font-main);
   color: var(--main-color);
 }
