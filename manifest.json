@@ -1,0 +1,33 @@
+{
+  "name": "Ashish Bhatt - Academic Homepage",
+  "short_name": "Ashish Bhatt",
+  "start_url": "https://bhattah.github.io",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#016d68",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "headshot_1.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "headshot_1.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["education", "science"],
+  "description": "Assistant Professor, Department of Mathematics, VIT. Research in scientific computing, model order reduction, and geometric integration.",
+  "screenshots": [
+    {
+      "src": "headshot_1.webp",
+      "sizes": "540x720",
+      "type": "image/webp",
+      "form_factor": "narrow"
+    }
+  ]
+}

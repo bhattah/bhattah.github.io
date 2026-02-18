@@ -1,72 +1,664 @@
-<html><head></head><body>
-<li value="">
-A. Bhatt &amp; B. E. Moore,<br>
-"Exponential integrators preserving local conservation laws of PDEs with time-dependent damping/driving forces",<br>
-<i>Invited talk in 2nd NME, China</i>
-(2019)
-</li>
-<br>
-<li value="">
-A. Bhatt, B. Haasdonk &amp; B. E. Moore,<br>
-"Structure-preserving Integration and Model Order Reduction",<br>
-<i>Invited talk at IIT, Roorkee</i>
-(2018)
-</li>
-<br>
-<li value="">
-A. Bhatt &amp; B. Haasdonk,<br>
-"Structure-preserving Model Order Reduction Using Weighted Inner Product",<br>
-<i>Reduced Order Modeling In Mechanics Of Materials (EUROMECH Colloquium), Bad Herrenalb</i>
-(2018)
-</li>
-<br>
-<li value="">
-A. Bhatt, F. Joerg &amp; B. Haasdonk,<br>
-"Certified Model Order Reduction of an Elastic Body with Large Deformations",<br>
-<i>WCCM, New York</i>
-(2018)
-</li>
-<br>
-<li value="">
-A. Bhatt, B. Haasdonk &amp; B. E. Moore,<br>
-"Error Estimation in Model Order Reduction of Elastic Multibody Systems",<br>
-<i>Invited talk at ICTS, Bangalore</i>
-(2018)
-</li>
-<br>
-<li value="">
-A. Bhatt &amp; B. E. Moore,<br>
-"Structure-preserving numerical integration of DEs with conformal invariants",<br>
-<i>Invited talk in Oberseminar, Universit&auml;t Stuttgart</i>
-(2017)
-</li>
-<br>
-<li value="">
-A. Bhatt &amp; B. E. Moore,<br>
-"Structure-preserving ERK methods for non-autonomous DEs",<br>
-<i>ENUMATH, Voss, Norway</i>
-(2017)
-</li>
-<br>
-<li value="">
-A. Bhatt &amp; B. Haasdonk,<br>
-"Certified and structure-preserving model order reduction of EMBS",<br>
-<i>RAMSA, New Delhi</i>
-(2017)
-</li>
-<br>
-<li value="">
-A. Bhatt &amp; B. E. Moore,<br>
-"Geometric Integration of a Damped Driven Nonlinear Schr&ouml;dinger Equation",<br>
-<i>11th AIMS Conference, Orlando</i>
-(2016)
-</li>
-<br>
-<li value="">
-A. Bhatt, D. Floyd &amp; B. E. Moore,<br>
-"Second Order Conformal Symplectic Integrators for Damped Hamiltonian Systems",<br>
-<i>SciCADE, Universit&auml;t Potsdam</i>
-(2015)
-</li>
-<br>
-</body></html>
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>JabRef references</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 3.0
+//
+// Copyright (c) 2006-2011, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+//
+// Features:
+// - intuitive find-as-you-type searching
+//    ~ case insensitive
+//    ~ ignore diacritics (optional)
+//
+// - search with/without Regular Expressions
+// - match BibTeX key
+//
+
+// Search settings
+var searchAbstract = true;	// search in abstract
+var searchComment = true;	// search in comment
+
+var noSquiggles = true; 	// ignore diacritics when searching
+var searchRegExp = false; 	// enable RegExp searches
+
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// check for quick search table and searchfield
+	if (!document.getElementById('qs_table')||!document.getElementById('quicksearch')) { return; }
+
+	// load all the rows and sort into arrays
+	loadTableData();
+	
+	//find the query field
+	qsfield = document.getElementById('qs_field');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+	
+	// set up preferences
+	initPreferences();
+
+	// shows the searchfield
+	document.getElementById('quicksearch').style.display = 'block';
+	document.getElementById('qs_field').onkeyup = quickSearch;
+}
+
+function loadTableData() {
+	// find table and appropriate rows
+	searchTable = document.getElementById('qs_table');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, comment, bibtex)
+	entryRows = new Array(); infoRows = new Array(); absRows = new Array(); revRows = new Array();
+
+	// get data from each row
+	entryRowsData = new Array(); absRowsData = new Array(); revRowsData = new Array(); 
+	
+	BibTeXKeys = new Array();
+	
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.match(/entry/)) {
+			entryRows[j] = allRows[i];
+			entryRowsData[j] = stripDiacritics(getTextContent(allRows[i]));
+			allRows[i].id ? BibTeXKeys[j] = allRows[i].id : allRows[i].id = 'autokey_'+j;
+			j ++;
+		} else {
+			infoRows[k++] = allRows[i];
+			// check for abstract/comment
+			if (allRows[i].className.match(/abstract/)) {
+				absRows.push(allRows[i]);
+				absRowsData[j-1] = stripDiacritics(getTextContent(allRows[i]));
+			} else if (allRows[i].className.match(/comment/)) {
+				revRows.push(allRows[i]);
+				revRowsData[j-1] = stripDiacritics(getTextContent(allRows[i]));
+			}
+		}
+	}
+	//number of entries and rows
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+	numAbs = absRows.length;
+	numRev = revRows.length;
+}
+
+function quickSearch(){
+	
+	tInput = qsfield;
+
+	if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		t = stripDiacritics(tInput.value);
+
+		if(!searchRegExp) { t = escapeRegExp(t); }
+			
+		// only search for valid RegExp
+		try {
+			textRegExp = new RegExp(t,"i");
+			closeAllInfo();
+			qsfield.className = '';
+		}
+			catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		if(cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			if (entryRowsData[i].search(textRegExp) != -1 || BibTeXKeys[i].search(textRegExp) != -1){ 
+				found = true;
+			} else {
+				if(searchAbstract && absRowsData[i]!=undefined) {
+					if (absRowsData[i].search(textRegExp) != -1){ found=true; } 
+				}
+				if(searchComment && revRowsData[i]!=undefined) {
+					if (revRowsData[i].search(textRegExp) != -1){ found=true; } 
+				}
+			}
+			
+			if (found){
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+
+// Strip Diacritics from text
+// http://stackoverflow.com/questions/990904/javascript-remove-accents-in-strings
+
+// String containing replacement characters for stripping accents 
+var stripstring = 
+    'AAAAAAACEEEEIIII'+
+    'DNOOOOO.OUUUUY..'+
+    'aaaaaaaceeeeiiii'+
+    'dnooooo.ouuuuy.y'+
+    'AaAaAaCcCcCcCcDd'+
+    'DdEeEeEeEeEeGgGg'+
+    'GgGgHhHhIiIiIiIi'+
+    'IiIiJjKkkLlLlLlL'+
+    'lJlNnNnNnnNnOoOo'+
+    'OoOoRrRrRrSsSsSs'+
+    'SsTtTtTtUuUuUuUu'+
+    'UuUuWwYyYZzZzZz.';
+
+function stripDiacritics(str){
+
+    if(noSquiggles==false){
+        return str;
+    }
+
+    var answer='';
+    for(var i=0;i<str.length;i++){
+        var ch=str[i];
+        var chindex=ch.charCodeAt(0)-192;   // Index of character code in the strip string
+        if(chindex>=0 && chindex<stripstring.length){
+            // Character is within our table, so we can strip the accent...
+            var outch=stripstring.charAt(chindex);
+            // ...unless it was shown as a '.'
+            if(outch!='.')ch=outch;
+        }
+        answer+=ch;
+    }
+    return answer;
+}
+
+// http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
+// NOTE: must escape every \ in the export code because of the JabRef Export...
+function escapeRegExp(str) {
+  return str.replace(/[-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+}
+
+function toggleInfo(articleid,info) {
+
+	var entry = document.getElementById(articleid);
+	var abs = document.getElementById('abs_'+articleid);
+	var rev = document.getElementById('rev_'+articleid);
+	var bib = document.getElementById('bib_'+articleid);
+	
+	if (abs && info == 'abstract') {
+		abs.className.indexOf('noshow') == -1?abs.className = 'abstract noshow':abs.className = 'abstract show';
+	} else if (rev && info == 'comment') {
+		rev.className.indexOf('noshow') == -1?rev.className = 'comment noshow':rev.className = 'comment show';
+	} else if (bib && info == 'bibtex') {
+		bib.className.indexOf('noshow') == -1?bib.className = 'bibtex noshow':bib.className = 'bibtex show';
+	} else { 
+		return;
+	}
+
+	// check if one or the other is available
+	var revshow; var absshow; var bibshow;
+	(abs && abs.className.indexOf('noshow') == -1)? absshow = true: absshow = false;
+	(rev && rev.className.indexOf('noshow') == -1)? revshow = true: revshow = false;	
+	(bib && bib.className.indexOf('noshow') == -1)? bibshow = true: bibshow = false;
+	
+	// highlight original entry
+	if(entry) {
+		if (revshow || absshow || bibshow) {
+		entry.className = 'entry highlight show';
+		} else {
+		entry.className = 'entry show';
+		}
+	}
+	
+	// When there's a combination of abstract/comment/bibtex showing, need to add class for correct styling
+	if(absshow) {
+		(revshow||bibshow)?abs.className = 'abstract nextshow':abs.className = 'abstract';
+	} 
+	if (revshow) {
+		bibshow?rev.className = 'comment nextshow': rev.className = 'comment';
+	}	
+	
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1 && node.className != "infolinks") { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	closeAllInfo();
+	for (var i = 0; i < numEntries; i++){ entryRows[i].className = 'entry show'; }
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function clearQS() {
+	qsfield.value = '';
+	showAll();
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+
+function updateSetting(obj){
+	var option = obj.id;
+	var checked = obj.value;
+
+	switch(option)
+	 {
+	 case "opt_searchAbs":
+	   searchAbstract=!searchAbstract;
+	   redoQS();
+	   break;
+	 case "opt_searchRev":
+	   searchComment=!searchComment;
+	   redoQS();
+	   break;
+	 case "opt_useRegExp":
+	   searchRegExp=!searchRegExp;
+	   redoQS();
+	   break;
+	 case "opt_noAccents":
+	   noSquiggles=!noSquiggles;
+	   loadTableData();
+	   redoQS();
+	   break;
+	 }
+}
+
+function initPreferences(){
+	if(searchAbstract){document.getElementById("opt_searchAbs").checked = true;}
+	if(searchComment){document.getElementById("opt_searchRev").checked = true;}
+	if(noSquiggles){document.getElementById("opt_noAccents").checked = true;}
+	if(searchRegExp){document.getElementById("opt_useRegExp").checked = true;}
+	
+	if(numAbs==0) {document.getElementById("opt_searchAbs").parentNode.style.display = 'none';}
+	if(numRev==0) {document.getElementById("opt_searchRev").parentNode.style.display = 'none';}
+}
+
+function toggleSettings(){
+	var togglebutton = document.getElementById('showsettings');
+	var settings = document.getElementById('settings');
+	
+	if(settings.className == "hidden"){
+		settings.className = "show";
+		togglebutton.innerText = "close settings";
+		togglebutton.textContent = "close settings";
+	}else{
+		settings.className = "hidden";
+		togglebutton.innerText = "settings...";		
+		togglebutton.textContent = "settings...";
+	}
+}
+
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: Arial, sans-serif; font-size: 13px; line-height: 1.2; padding: 1em; color: #2E2E2E; margin: auto 2em; }
+
+form#quicksearch { width: auto; border-style: solid; border-color: gray; border-width: 1px 0px; padding: 0.7em 0.5em; display:none; position:relative; }
+span#searchstat {padding-left: 1em;}
+
+div#settings { margin-top:0.7em; /* border-bottom: 1px transparent solid; background-color: #efefef; border: 1px grey solid; */ }
+div#settings ul {margin: 0; padding: 0; }
+div#settings li {margin: 0; padding: 0 1em 0 0; display: inline; list-style: none; }
+div#settings li + li { border-left: 2px #efefef solid; padding-left: 0.5em;}
+div#settings input { margin-bottom: 0px;}
+
+div#settings.hidden {display:none;}
+
+#showsettings { border: 1px grey solid; padding: 0 0.5em; float:right; line-height: 1.6em; text-align: right; }
+#showsettings:hover { cursor: pointer; }
+
+.invalidsearch { background-color: red; }
+input[type="button"] { background-color: #efefef; border: 1px #2E2E2E solid;}
+
+table { width: 100%; empty-cells: show; border-spacing: 0em 0.2em; margin: 1em 0em; border-style: none; }
+th, td { border: 1px gray solid; border-width: 1px 1px; padding: 0.5em; vertical-align: top; text-align: left; }
+th { background-color: #efefef; }
+td + td, th + th { border-left: none; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+tr.highlight td { background-color: #EFEFEF; border-top: 2px #2E2E2E solid; font-weight: bold; }
+tr.abstract td, tr.comment td, tr.bibtex td { background-color: #EFEFEF; text-align: justify; border-bottom: 2px #2E2E2E solid; }
+tr.nextshow td { border-bottom: 1px gray solid; }
+
+tr.bibtex pre { width: 100%; overflow: auto; white-space: pre-wrap;}
+p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
+
+@media print {
+	p.infolinks, #qs_settings, #quicksearch, t.bibtex { display: none !important; }
+	tr { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<form action="" id="quicksearch">
+<input type="text" id="qs_field" autocomplete="off" placeholder="Type to search..." /> <input type="button" onclick="clearQS()" value="clear" />
+<span id="searchstat">Matching entries: <span id="stat">0</span></span>
+<div id="showsettings" onclick="toggleSettings()">settings...</div>
+<div id="settings" class="hidden">
+<ul>
+<li><input type="checkbox" class="search_setting" id="opt_searchAbs" onchange="updateSetting(this)"><label for="opt_searchAbs"> include abstract</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_searchRev" onchange="updateSetting(this)"><label for="opt_searchRev"> include comment</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_useRegExp" onchange="updateSetting(this)"><label for="opt_useRegExp"> use RegExp</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_noAccents" onchange="updateSetting(this)"><label for="opt_noAccents"> ignore accents</label></li>
+</ul>
+</div>
+</form>
+<table id="qs_table" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="Bhatt2026a" class="entry">
+	<td>Bhatt, A.</td>
+	<td>Symplectic and constraint-preserving model order reduction of constrained mechanical systems <p class="infolinks">[<a href="javascript:toggleInfo('Bhatt2026a','bibtex')">BibTeX</a>]</p></td>
+	<td>2026</td>
+	<td>MOR Seminar, University of Stuttgart, Germany&nbsp;</td>
+	<td>misc</td>
+	<td><a href="https://www.ians.uni-stuttgart.de/anm/teaching/morseminar/">URL</a>&nbsp;</td>
+</tr>
+<tr id="bib_Bhatt2026a" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{Bhatt2026a,
+  author = {Bhatt, Ashish},
+  title = {Symplectic and constraint-preserving model order reduction of constrained mechanical systems},
+  journal = {MOR Seminar, University of Stuttgart, Germany},
+  year = {2026},
+  url = {https://www.ians.uni-stuttgart.de/anm/teaching/morseminar/}
+}
+</pre></td>
+</tr>
+<tr id="Bhatt2025b" class="entry">
+	<td>Bhatt, A.</td>
+	<td>Symplectic and constraint-preserving model order reduction of constrained mechanical systems <p class="infolinks">[<a href="javascript:toggleInfo('Bhatt2025b','bibtex')">BibTeX</a>]</p></td>
+	<td>2025</td>
+	<td>IC-STEEH, VIT Vellore, India&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_Bhatt2025b" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{Bhatt2025b,
+  author = {Bhatt, Ashish},
+  title = {Symplectic and constraint-preserving model order reduction of constrained mechanical systems},
+  journal = {IC-STEEH, VIT Vellore, India},
+  year = {2025}
+}
+</pre></td>
+</tr>
+<tr id="Bhatt2025c" class="entry">
+	<td>Bhatt, A.</td>
+	<td>Structure preservation of dynamical systems in numerical integration, model order reduction, and neural networks <p class="infolinks">[<a href="javascript:toggleInfo('Bhatt2025c','bibtex')">BibTeX</a>]</p></td>
+	<td>2025</td>
+	<td>University of Peradeniya, Sri Lanka&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_Bhatt2025c" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{Bhatt2025c,
+  author = {Bhatt, Ashish},
+  title = {Structure preservation of dynamical systems in numerical integration, model order reduction, and neural networks},
+  journal = {University of Peradeniya, Sri Lanka},
+  year = {2025}
+}
+</pre></td>
+</tr>
+<tr id="Bhatt2024b" class="entry">
+	<td>Bhatt, A.</td>
+	<td>Symplectic and constraint-preserving model order reduction of lattice dynamics <p class="infolinks">[<a href="javascript:toggleInfo('Bhatt2024b','bibtex')">BibTeX</a>]</p></td>
+	<td>2024</td>
+	<td>ISTAM conference, Bengaluru, India&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_Bhatt2024b" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{Bhatt2024b,
+  author = {Bhatt, Ashish},
+  title = {Symplectic and constraint-preserving model order reduction of lattice dynamics},
+  journal = {ISTAM conference, Bengaluru, India},
+  year = {2024}
+}
+</pre></td>
+</tr>
+<tr id="Bhatt2019a" class="entry">
+	<td>Bhatt, A. and Moore, B.E.</td>
+	<td>Exponential integrators preserving local conservation laws of PDEs with time-dependent damping/driving forces <p class="infolinks">[<a href="javascript:toggleInfo('Bhatt2019a','bibtex')">BibTeX</a>]</p></td>
+	<td>2019</td>
+	<td>Invited talk in 2nd NME, China&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_Bhatt2019a" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{Bhatt2019a,
+  author = {Bhatt, Ashish and Moore, Brian E},
+  title = {Exponential integrators preserving local conservation laws of PDEs with time-dependent damping/driving forces},
+  journal = {Invited talk in 2nd NME, China},
+  year = {2019}
+}
+</pre></td>
+</tr>
+<tr id="Bhatt2018b" class="entry">
+	<td>Bhatt, A. and Haasdonk, B.</td>
+	<td>Structure-preserving Model Order Reduction Using Weighted Inner Product <p class="infolinks">[<a href="javascript:toggleInfo('Bhatt2018b','bibtex')">BibTeX</a>]</p></td>
+	<td>2018</td>
+	<td>Reduced Order Modeling In Mechanics Of Materials (EUROMECH Colloquium), Bad Herrenalb, Germany&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_Bhatt2018b" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{Bhatt2018b,
+  author = {Bhatt, Ashish and Haasdonk, Bernard},
+  title = {Structure-preserving Model Order Reduction Using Weighted Inner Product},
+  journal = {Reduced Order Modeling In Mechanics Of Materials (EUROMECH Colloquium), Bad Herrenalb, Germany},
+  year = {2018}
+}
+</pre></td>
+</tr>
+<tr id="Bhatt2018c" class="entry">
+	<td>Bhatt, A., Joerg, F. and Haasdonk, B.</td>
+	<td>Certified Model Order Reduction of an Elastic Body with Large Deformations <p class="infolinks">[<a href="javascript:toggleInfo('Bhatt2018c','bibtex')">BibTeX</a>]</p></td>
+	<td>2018</td>
+	<td>WCCM, New York, USA&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_Bhatt2018c" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{Bhatt2018c,
+  author = {Bhatt, Ashish and Joerg, Fehr and Haasdonk, Bernard},
+  title = {Certified Model Order Reduction of an Elastic Body with Large Deformations},
+  journal = {WCCM, New York, USA},
+  year = {2018}
+}
+</pre></td>
+</tr>
+<tr id="Bhatt2018d" class="entry">
+	<td>Bhatt, A., Haasdonk, B. and Moore, B.E.</td>
+	<td>Error Estimation in Model Order Reduction of Elastic Multibody Systems <p class="infolinks">[<a href="javascript:toggleInfo('Bhatt2018d','bibtex')">BibTeX</a>]</p></td>
+	<td>2018</td>
+	<td>Invited talk in ICTS, Bangalore, India&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_Bhatt2018d" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{Bhatt2018d,
+  author = {Bhatt, Ashish and Haasdonk, Bernard and Moore, Brian E},
+  title = {Error Estimation in Model Order Reduction of Elastic Multibody Systems},
+  journal = {Invited talk in ICTS, Bangalore, India},
+  year = {2018}
+}
+</pre></td>
+</tr>
+<tr id="AshishBhatt2017" class="entry">
+	<td>Bhatt, A. and Moore, B.E.</td>
+	<td>Structure-preserving numerical integration of DEs with conformal invariants <p class="infolinks">[<a href="javascript:toggleInfo('AshishBhatt2017','bibtex')">BibTeX</a>]</p></td>
+	<td>2017</td>
+	<td>Invited talk in Oberseminar, Universit&auml;t Stuttgart, Germany&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_AshishBhatt2017" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{AshishBhatt2017,
+  author = {Bhatt, Ashish and Moore, Brian E},
+  title = {Structure-preserving numerical integration of DEs with conformal invariants},
+  journal = {Invited talk in Oberseminar, Universit&auml;t Stuttgart, Germany},
+  year = {2017}
+}
+</pre></td>
+</tr>
+<tr id="AshishBhatt2017a" class="entry">
+	<td>Bhatt, A. and Moore, B.E.</td>
+	<td>Structure-preserving ERK methods for non-autonomous DEs <p class="infolinks">[<a href="javascript:toggleInfo('AshishBhatt2017a','bibtex')">BibTeX</a>]</p></td>
+	<td>2017</td>
+	<td>ENUMATH, Voss, Norway&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_AshishBhatt2017a" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{AshishBhatt2017a,
+  author = {Bhatt, Ashish and Moore, Brian E},
+  title = {Structure-preserving ERK methods for non-autonomous DEs},
+  journal = {ENUMATH, Voss, Norway},
+  year = {2017}
+}
+</pre></td>
+</tr>
+<tr id="AshishBhatt2018" class="entry">
+	<td>Bhatt, A. and Haasdonk, B.</td>
+	<td>Certified and structure-preserving model order reduction of EMBS <p class="infolinks">[<a href="javascript:toggleInfo('AshishBhatt2018','bibtex')">BibTeX</a>]</p></td>
+	<td>2017</td>
+	<td>RAMSA, New Delhi, India&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_AshishBhatt2018" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{AshishBhatt2018,
+  author = {Bhatt, Ashish and Haasdonk, Bernard},
+  title = {Certified and structure-preserving model order reduction of EMBS},
+  journal = {RAMSA, New Delhi, India},
+  year = {2017}
+}
+</pre></td>
+</tr>
+<tr id="AshishBhatt2016" class="entry">
+	<td>Bhatt, A. and Moore, B.E.</td>
+	<td>Geometric Integration of a Damped Driven Nonlinear Schr&ouml;dinger Equation <p class="infolinks">[<a href="javascript:toggleInfo('AshishBhatt2016','bibtex')">BibTeX</a>]</p></td>
+	<td>2016</td>
+	<td>11th AIMS Conference, Orlando, USA&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_AshishBhatt2016" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{AshishBhatt2016,
+  author = {Bhatt, Ashish and Moore, Brian E},
+  title = {Geometric Integration of a Damped Driven Nonlinear Schr&ouml;dinger Equation},
+  journal = {11th AIMS Conference, Orlando, USA},
+  year = {2016}
+}
+</pre></td>
+</tr>
+<tr id="AshishBhatt2015" class="entry">
+	<td>Bhatt, A., Floyd, D. and Moore, B.E.</td>
+	<td>Second Order Conformal Symplectic Integrators for Damped Hamiltonian Systems <p class="infolinks">[<a href="javascript:toggleInfo('AshishBhatt2015','bibtex')">BibTeX</a>]</p></td>
+	<td>2015</td>
+	<td>SciCADE, Universit&auml;t Potsdam, Germany&nbsp;</td>
+	<td>misc</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_AshishBhatt2015" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{AshishBhatt2015,
+  author = {Bhatt, Ashish and Floyd, Dwayne and Moore, Brian E.},
+  title = {Second Order Conformal Symplectic Integrators for Damped Hamiltonian Systems},
+  journal = {SciCADE, Universit&auml;t Potsdam, Germany},
+  year = {2015}
+}
+</pre></td>
+</tr>
+</tbody>
+</table>
+<footer>
+ <small>Created by <a href="https://www.jabref.org">JabRef</a> on 2026/02/18.</small>
+</footer>
+<!-- file generated by JabRef -->
+</body>
+</html>
