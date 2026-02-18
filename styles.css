@@ -237,7 +237,35 @@ address {
   transform: translateY(-0.6rem) rotate(-45deg);
 }
 
+/* Share button */
+.share-btn {
+  display: none;
+  background: var(--main-color);
+  color: var(--accent-color);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: 1.5rem;
+  right: 5.5rem;
+  z-index: 1000;
+  font-size: 1.2rem;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.share-btn:hover {
+  background: #015550;
+  transform: scale(1.1);
+}
+
+.share-btn:active {
+  transform: scale(0.95);
+}
 @media (max-width: 800px) {
+  .share-btn {
+      display: block;
+    }
   header {
     position: relative;
   }
@@ -277,6 +305,9 @@ address {
   .nav-toggle {
     display: none !important;
   }
+    .share-btn {
+      display: none !important;
+    }
   nav[role="navigation"] ul {
     display: flex !important;
     flex-direction: row;
